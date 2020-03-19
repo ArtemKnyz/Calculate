@@ -1,9 +1,8 @@
 public class Simple {
 
     public static void main(String[] args) {
-        //назначаем символ выхода из программы
-        char exitCharacter = 'q';
-        Logic read = new Logic(exitCharacter);
+
+        Logic read = new Logic();
 
         while (true) {
             try {

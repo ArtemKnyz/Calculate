@@ -10,11 +10,8 @@ public class Logic {
 
         boolean flag = false;
 
-        private boolean exitFlag;
-
-
-    public Logic(char exitCharacter) {
-        }
+        public boolean exitFlag;
+        final char resultChar = '=';
 
 
         public void read() {
@@ -28,8 +25,6 @@ public class Logic {
             String value = scanner.nextLine();
 
             try {
-                // этим знаком оканчивается наше выражение
-                char resultChar = '=';
                 if ((value.charAt(value.length() - 1) != resultChar)) {
                     throw new RuntimeException();
                 }
@@ -38,21 +33,28 @@ public class Logic {
                 String[] simbol = value.split("[+-/*]");
 
 
-                for (String s : roman) {
-                    if (s.equals(simbol[0]) | s.equals(simbol[1])) {
-                        flag = true;
+                M: for (String s: simbol) {
+                    for (String item : roman) {
+                        if (s.equals(item)) {
+                            flag = true;
+                            continue M;
+                        }
                     }
-
-                    //при флаге = true , результат res будет выводиться римскими цифрами
-                    if (flag) {
-                        num1 = romanToNumber(simbol[0]);  //
-                        num2 = romanToNumber(simbol[1]);
-                    } else {
-                        num1 = Integer.parseInt(simbol[0]);
-                        num2 = Integer.parseInt(simbol[1]);
-                    }
-                    operation = value.charAt(simbol[0].length());
+                    flag = false;
                 }
+
+                if (flag) {
+                    num1 = romanToNumber(simbol[0]);
+                    num2 = romanToNumber(simbol[1]);
+                } else {
+                    num1 = Integer.parseInt(simbol[0]);
+                    num2 = Integer.parseInt(simbol[1]);
+                }
+                operation = value.charAt(simbol[0].length());
+
+
+
+
                 if ((num1 > 10 | num1 < 0) | (num2 > 10 | num2 < 0)) {
                     throw new IllegalArgumentException();
                 }

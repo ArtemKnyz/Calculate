@@ -1,9 +1,6 @@
 import java.util.List;
 
 public class Converting extends Logic {
-    public Converting(char exitCharacter) {
-        super(exitCharacter);
-    }
 
 
     public static String arabicToRoman(int number) {
